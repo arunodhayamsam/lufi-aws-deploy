@@ -1,5 +1,5 @@
 variable "aws_region" {
-    default = "aws_region"
+    default = "aws_region_specified"
 }
 variable "vpc_cidr" {
     default = "198.168.0.0/16"
