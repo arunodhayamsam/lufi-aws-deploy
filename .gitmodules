@@ -1,0 +1,3 @@
+[submodule "ansible-role-lufi"]
+	path = ansible-role-lufi
+	url = https://github.com/arunodhayamsam/ansible-role-lufi
