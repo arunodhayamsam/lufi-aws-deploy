@@ -42,11 +42,11 @@ Edit the `main.tf` template to add the path of ansible palybook.yml
 ```yaml
 provisioner "local-exec" {
     command = <<EOT
-      sleep 30;
-      >hosts;
-      echo "[Lufi]" | tee -a hosts;
-      echo "${aws_instance.ec2_instance.public_ip} ansible_user=${var.user} ansible_ssh_private_key_file=${var.private_key}" | tee -a hosts;
-      export ANSIBLE_HOST_KEY_CHECKING=False;
+      sleep 30 && \
+      >hosts && \
+      echo "[Lufi]" | tee -a hosts && \
+      echo "${aws_instance.ec2_instance.public_ip} ansible_user=${var.user} ansible_ssh_private_key_file=${var.private_key}" | tee -a hosts && \
+      export ANSIBLE_HOST_KEY_CHECKING=False && \
       ansible-playbook -u ${var.user} --private-key ${var.private_key} -i hosts <path_to_playbook's_site.yml> 
     EOT
   }
