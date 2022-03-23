@@ -114,12 +114,12 @@ resource "aws_instance" "ec2_instance" {
 
   provisioner "local-exec" {
     command = <<EOT
-        sleep 120;
-	    >hosts;
-	    echo "[Lufi]" | tee -a hosts;
+      sleep 120;
+      >hosts;
+      echo "[Lufi]" | tee -a hosts;
       echo "${aws_instance.ec2_instance.public_ip} ansible_user=${var.user} ansible_ssh_private_key_file=${var.private_key}" | tee -a hosts;
       export ANSIBLE_HOST_KEY_CHECKING=False;
-	    ansible-playbook -u ${var.user} --private-key ${var.private_key} -i hosts ../ansible-role-lufi/tasks.yml
+      ansible-playbook -u ${var.user} --private-key ${var.private_key} -i hosts ../ansible-role-lufi/tasks.yml
     EOT
   }
   
