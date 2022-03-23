@@ -14,4 +14,5 @@
 | `public_key` | /home/user_name/.ssh/id_rsa_pub | Set the publickey value for the ec2 instance from the host machine |
 | `private_key` | /home/user_name/.ssh/id_rsa | Set the private key value for the ec2 instance from the hostmachine |
 | `aws_access_key` | AWSACCESSKEY | Enter your aws access key |
-| `aws_secrete_key` | AWSSECRETEKEY | Enter your aws secrete key
+| `aws_secrete_key` | AWSSECRETEKEY | Enter your aws secrete key |
+| `instance_name` | Lufi_app_instance | Set the name for instance |

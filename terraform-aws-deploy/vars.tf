@@ -2,13 +2,13 @@ variable "aws_region" {
     default = "aws_region"
 }
 variable "vpc_cidr" {
-    default = "198.168.0.0/16"
+    default = "cidr_value"
 }
 variable "public_subnet_cidr" {
-    default = "198.168.1.0/24"
+    default = "cidr_value"
 }
 variable "public_subnet1_cidr" {
-    default = "198.168.2.0/24"
+    default = "cidr_value"
 }
 
 variable "user" {
@@ -27,6 +27,10 @@ variable "aws_access_key" {
 
 variable "aws_secret_key" {
     default = "aws_secrete_key"
+}
+
+variable "instance_name" {
+    default = "instance_name"  
 }
 
 

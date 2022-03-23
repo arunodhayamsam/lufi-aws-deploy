@@ -5,7 +5,7 @@ resource "aws_vpc" "MAIN" {
   enable_dns_support   = true
   instance_tenancy     = "default"
   tags                 = {
-      Name             = "tfvpc"
+      Name             = "lufi-master-vpc"
   }
 }
 
@@ -14,7 +14,7 @@ resource "aws_vpc" "MAIN" {
 resource "aws_internet_gateway" "IGW" {
   vpc_id           = "${aws_vpc.MAIN.id}"
   tags = {
-    "Name"         = "NewIGW"
+    "Name"         = "lufi-master-igw"
   } 
 }
 
@@ -25,14 +25,7 @@ resource "aws_subnet" "publicsubnet" {
   cidr_block              = "${var.public_subnet_cidr}"
   map_public_ip_on_launch = true
   tags                    = {
-      Name                = "publicsubnet"
-  }  
-}
-resource "aws_subnet" "publicsubnet1" {
-  vpc_id           = "${aws_vpc.MAIN.id}" 
-  cidr_block       = "${var.public_subnet1_cidr}"
-  tags             = {
-      Name         = "publicsubnet1"
+      Name                = "lufi-master-us-eas-1-public"
   }  
 }
 
@@ -45,7 +38,7 @@ resource "aws_route_table" "publicroute" {
     }
              
     tags           = {
-      Name         = "newtestRTB"
+      Name         = "lufi-master-us-east-1-public-rt"
  }
 }
 
@@ -55,7 +48,7 @@ resource "aws_main_route_table_association" "mainRTB" {
 }
 ## Create security group
 resource "aws_security_group" "security" {
-  name             = "TetsSG"  
+  name             = "lufi-master-sg"  
   description      = "allow all traffic"
   vpc_id           = "${aws_vpc.MAIN.id}"
 
@@ -67,6 +60,7 @@ resource "aws_security_group" "security" {
     cidr_blocks    = ["0.0.0.0/0"]
   }
   ingress  {
+    description    = "allow port SSH"
     from_port      = "22"
     to_port        = "22"
     protocol       = "tcp"
@@ -84,7 +78,7 @@ resource "aws_security_group" "security" {
 #Create key_pair for the instance
 
 resource "aws_key_pair" "genkey" {
-  key_name           = "newinstance"
+  key_name           = "lufi.webapp"
   public_key         = "${file(var.public_key)}"
 }
 
@@ -95,7 +89,7 @@ resource "aws_instance" "ec2_instance" {
   associate_public_ip_address = "true"
   subnet_id          = "${aws_subnet.publicsubnet.id}"
   vpc_security_group_ids = ["${aws_security_group.security.id}"]
-  key_name           = "newinstance"
+  key_name           = "lufi.webapp"
 
   connection          {
     agent            = false
