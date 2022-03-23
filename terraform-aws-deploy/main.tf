@@ -124,7 +124,7 @@ resource "aws_instance" "ec2_instance" {
   }
   
   tags               = {
-    Name             = "testinstance1"
+    Name             = "${var.instance_name}"
   }
 }
 
