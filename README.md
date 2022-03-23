@@ -20,10 +20,10 @@ git submodule update --init
 ```
 ## Create the playbook for task running
 
-Create the `sites.yaml` ansible playbook for access the ansible-roles to application runing.
+Create the `site.yaml` ansible playbook for access the ansible-roles to application runing.
 
 ```yaml
-#sites.yaml
+#site.yaml
 
 - hosts: all
   become: true
@@ -33,7 +33,6 @@ Create the `sites.yaml` ansible playbook for access the ansible-roles to applica
 ```    
 
 ## Provide a path of playbook 
-> **_NOTE:_**   Provide the path of created `sites.yaml` to <path_to_playbook's_site.yml>  .
 
 Enter into the terraform-aws-deploy directory
 ```yaml
