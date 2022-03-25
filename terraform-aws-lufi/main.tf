@@ -25,7 +25,7 @@ resource "aws_subnet" "publicsubnet" {
   cidr_block              = "${var.public_subnet_cidr}"
   map_public_ip_on_launch = true
   tags                    = {
-      Name                = "lufi-master-us-eas-1-public"
+      Name                = "lufi-master-us-east-1-public"
   }  
 }
 
@@ -108,12 +108,12 @@ resource "aws_instance" "ec2_instance" {
 
   provisioner "local-exec" {
     command = <<EOT
-      sleep 120;
-      >hosts;
-      echo "[Lufi]" | tee -a hosts;
-      echo "${aws_instance.ec2_instance.public_ip} ansible_user=${var.user} ansible_ssh_private_key_file=${var.private_key}" | tee -a hosts;
-      export ANSIBLE_HOST_KEY_CHECKING=False;
-      ansible-playbook -u ${var.user} --private-key ${var.private_key} -i hosts ../ansible-role-lufi/tasks.yml
+      sleep 120 && \
+      > hosts && \
+      echo "[Lufi]" | tee -a hosts && \
+      echo "${aws_instance.ec2_instance.public_ip} ansible_user=${var.user} ansible_ssh_private_key_file=${var.private_key}" | tee -a hosts && \
+      export ANSIBLE_HOST_KEY_CHECKING=False && \
+      ansible-playbook -u ${var.user} --private-key ${var.private_key} -i hosts site.yml
     EOT
   }
   
