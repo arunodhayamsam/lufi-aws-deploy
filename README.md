@@ -36,7 +36,7 @@ Create the `site.yaml` ansible playbook for access the ansible-roles to applicat
 
 Enter into the terraform-aws-deploy directory
 ```yaml
-cd terraform-aws-deploy
+cd terraform-aws-lufi
 ``` 
 Edit the `main.tf` template to add the path of ansible palybook.yml 
 ```yaml
